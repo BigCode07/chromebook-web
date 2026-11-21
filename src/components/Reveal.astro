@@ -1,0 +1,23 @@
+<script>
+  // Aparición suave de las secciones al entrar en pantalla.
+  // El CSS solo oculta si hay JS (html.js) y la persona no pidió menos movimiento.
+  const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const elementos = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reducir || !('IntersectionObserver' in window)) {
+    elementos.forEach((el) => el.classList.add('visible'));
+  } else {
+    const obs = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -5% 0px' },
+    );
+    elementos.forEach((el) => obs.observe(el));
+  }
+</script>

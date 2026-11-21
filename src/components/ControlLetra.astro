@@ -1,0 +1,66 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: clase = '' } = Astro.props;
+
+const opciones = [
+  { escala: 'normal', texto: 'A', etiqueta: 'Letra normal', tam: 'text-base' },
+  { escala: 'grande', texto: 'A+', etiqueta: 'Letra grande', tam: 'text-lg' },
+  { escala: 'muy-grande', texto: 'A++', etiqueta: 'Letra muy grande', tam: 'text-xl' },
+];
+---
+
+<div role="group" aria-label="Tamaño de letra" class:list={['flex items-center gap-1', clase]} data-control-letra>
+  <span class="mr-1 hidden text-sm font-bold text-texto-suave 2xl:inline" aria-hidden="true">Letra</span>
+  {
+    opciones.map((o) => (
+      <button
+        type="button"
+        data-escala={o.escala}
+        aria-label={o.etiqueta}
+        aria-pressed={o.escala === 'normal' ? 'true' : 'false'}
+        class:list={[
+          'inline-flex h-12 min-w-12 items-center justify-center rounded-lg border-2 border-azul px-2 font-bold text-azul transition-colors',
+          'hover:bg-celeste aria-pressed:bg-azul aria-pressed:text-white',
+          o.tam,
+        ]}
+      >
+        {o.texto}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  const KEY = 'fontScale:v1';
+  const VALIDAS = ['normal', 'grande', 'muy-grande'];
+
+  function marcarBotones(escala: string) {
+    document.querySelectorAll<HTMLButtonElement>('[data-control-letra] [data-escala]').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.escala === escala));
+    });
+  }
+
+  function aplicar(escala: string) {
+    const html = document.documentElement;
+    if (escala === 'normal') html.removeAttribute('data-font-scale');
+    else html.setAttribute('data-font-scale', escala);
+    marcarBotones(escala);
+    try {
+      localStorage.setItem(KEY, escala);
+    } catch {
+      /* modo privado o almacenamiento bloqueado: la escala vale solo para esta visita */
+    }
+  }
+
+  // Estado inicial: lo que dejó aplicado el script del <head>
+  marcarBotones(document.documentElement.getAttribute('data-font-scale') ?? 'normal');
+
+  document.querySelectorAll<HTMLButtonElement>('[data-control-letra] [data-escala]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const e = b.dataset.escala ?? 'normal';
+      if (VALIDAS.includes(e)) aplicar(e);
+    });
+  });
+</script>

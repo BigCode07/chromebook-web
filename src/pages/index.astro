@@ -1,17 +1,56 @@
 ---
-import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFlotante from '../components/WhatsAppFlotante.astro';
+import Reveal from '../components/Reveal.astro';
+import Hero from '../components/sections/Hero.astro';
+import Problema from '../components/sections/Problema.astro';
+import Paquete from '../components/sections/Paquete.astro';
+import Usos from '../components/sections/Usos.astro';
+import Pasos from '../components/sections/Pasos.astro';
+import Capacitacion from '../components/sections/Capacitacion.astro';
+import Embajadores from '../components/sections/Embajadores.astro';
+import Equipo from '../components/sections/Equipo.astro';
+import Comparativa from '../components/sections/Comparativa.astro';
+import Donde from '../components/sections/Donde.astro';
+import Financiacion from '../components/sections/Financiacion.astro';
+import Aliados from '../components/sections/Aliados.astro';
+import Proyecto from '../components/sections/Proyecto.astro';
+import Preguntas from '../components/sections/Preguntas.astro';
+import Contacto from '../components/sections/Contacto.astro';
+import heroImg from '../assets/images/hero.jpg';
+import { site } from '../data/site';
+import { texto } from '../lib/utils';
+
+const titulo = `${texto(site.marca)} · Chromebook + capacitación para personas mayores`;
+const descripcion =
+  'Una computadora simple y segura para tus viejos, con talleres de uso y seguridad digital incluidos. Cuotas con tu tarjeta y soporte después de la compra.';
+
+const og = await getImage({ src: heroImg, width: 1200, height: 630, format: 'jpg', fit: 'cover' });
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Chromebook Web</title>
-	</head>
-	<body>
-		<h1 class="text-2xl font-bold">Chromebook Web</h1>
-	</body>
-</html>
+<BaseLayout title={titulo} description={descripcion} ogImage={og.src}>
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <Problema />
+    <Paquete />
+    <Usos />
+    <Pasos />
+    <Capacitacion />
+    <Embajadores />
+    <Equipo />
+    <Comparativa />
+    <Donde />
+    <Financiacion />
+    <Aliados />
+    <Proyecto />
+    <Preguntas />
+    <Contacto />
+  </main>
+  <Footer />
+  <WhatsAppFlotante />
+  <Reveal />
+</BaseLayout>

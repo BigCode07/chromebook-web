@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import Seccion from '../ui/Seccion.astro';
+import Dato from '../ui/Dato.astro';
+import Icono from '../ui/Icono.astro';
+import { site } from '../../data/site';
+import chromebook from '../../assets/images/chromebook.jpg';
+---
+
+<Seccion id="paquete" fondo="papel" labelledby="paquete-titulo">
+  <h2 id="paquete-titulo" class="max-w-3xl text-3xl font-bold md:text-[2.5rem]">
+    Todo lo que necesitan, en un solo paquete
+  </h2>
+
+  <div class="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_auto_1fr]">
+    <article class="flex flex-col overflow-hidden rounded-3xl border border-borde bg-crema">
+      <Image
+        src={chromebook}
+        alt="Una laptop abierta sobre una mesa de madera, junto a una taza blanca."
+        widths={[480, 720, 960]}
+        sizes="(min-width: 1024px) 480px, 100vw"
+        class="aspect-[16/9] w-full object-cover"
+      />
+      <div class="flex flex-1 flex-col p-7">
+        <h3 class="text-2xl font-bold">El equipo</h3>
+        <p class="mt-3 text-lg">
+          <strong>Chromebook:</strong> una computadora simple, que se prende rápido y se actualiza sola.
+        </p>
+        <p class="mt-3 text-lg">
+          Se configura lista para usar. <Dato valor={site.paquete.preconfigurada} />
+        </p>
+        <p class="mt-3 text-base text-texto-suave"><Dato valor={site.equipo.modeloResumen} /></p>
+        <a href="#equipo" class="mt-auto inline-flex min-h-12 items-center pt-5 text-lg font-bold underline underline-offset-4">
+          Ver la ficha técnica
+        </a>
+      </div>
+    </article>
+
+    <div class="flex items-center justify-center" aria-hidden="true">
+      <span class="flex h-14 w-14 items-center justify-center rounded-full bg-terracota text-white">
+        <Icono nombre="mas" class="h-8 w-8" />
+      </span>
+    </div>
+
+    <article class="flex flex-col rounded-3xl border border-borde bg-crema p-7">
+      <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-azul text-white">
+        <Icono nombre="grupo" class="h-8 w-8" />
+      </span>
+      <h3 class="mt-5 text-2xl font-bold">La capacitación</h3>
+      <p class="mt-3 text-lg">Talleres presenciales de uso del equipo y seguridad digital, en grupos reducidos.</p>
+      <p class="mt-3 text-lg">
+        Aprenden a reconocer estafas, a manejar el home banking y a usar herramientas de inteligencia artificial de
+        forma simple.
+      </p>
+      <p class="mt-3 text-lg">
+        Los dan jubilados formados como <strong>embajadores</strong>: aprenden de alguien como ellos.
+      </p>
+      <a href="#capacitacion" class="mt-auto inline-flex min-h-12 items-center pt-5 text-lg font-bold underline underline-offset-4">
+        Ver cómo es la capacitación
+      </a>
+    </article>
+  </div>
+
+  <div class="mt-10 rounded-3xl bg-azul px-7 py-8 text-center md:px-12">
+    <p class="font-display text-2xl font-semibold text-white md:text-3xl">La capacitación no es un extra.</p>
+    <p class="mt-1 font-display text-2xl font-semibold text-[#f3c969] md:text-3xl">Es parte del producto.</p>
+  </div>
+</Seccion>

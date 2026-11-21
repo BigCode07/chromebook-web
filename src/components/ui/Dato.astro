@@ -1,0 +1,21 @@
+---
+import type { Dato } from '../../data/site';
+
+interface Props {
+  valor: Dato;
+}
+const { valor } = Astro.props;
+---
+
+{
+  typeof valor === 'string' ? (
+    valor
+  ) : (
+    <span
+      class="rounded-md border border-dashed border-aviso-borde bg-aviso px-2 py-0.5 text-[0.95em] font-bold text-aviso-texto"
+      data-pendiente
+    >
+      [{valor.etiqueta}]
+    </span>
+  )
+}
