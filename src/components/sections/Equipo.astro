@@ -1,0 +1,71 @@
+---
+import Seccion from '../ui/Seccion.astro';
+import Dato from '../ui/Dato.astro';
+import { site } from '../../data/site';
+
+const razones = [
+  'Se prende en segundos y tiene menos pasos que una computadora tradicional.',
+  'Se actualiza sola, sin que nadie tenga que acordarse.',
+  'Funciona con la cuenta de Google que muchos ya usan en el celular.',
+];
+---
+
+<Seccion id="equipo" labelledby="equipo-titulo">
+  <h2 id="equipo-titulo" class="max-w-3xl text-3xl font-bold md:text-[2.5rem]">El equipo</h2>
+
+  <div class="mt-10 grid items-start gap-8 lg:grid-cols-[1.25fr_0.75fr]">
+    <details class="group rounded-3xl border border-borde bg-papel" open>
+      <summary class="flex min-h-16 items-center justify-between gap-4 px-7 py-4 text-xl font-bold text-azul">
+        Ficha técnica
+        <span class="faq-mas flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-celeste text-2xl transition-transform" aria-hidden="true">+</span>
+      </summary>
+      <div class="px-4 pb-6 sm:px-7">
+        <table class="block w-full border-collapse text-left text-lg sm:table">
+          <caption class="sr-only">Ficha técnica del Chromebook</caption>
+          <thead class="sr-only sm:table-header-group">
+            <tr class="border-b-2 border-borde">
+              <th scope="col" class="py-3 pr-4 font-bold text-azul">Característica</th>
+              <th scope="col" class="py-3 font-bold text-azul">Detalle</th>
+            </tr>
+          </thead>
+          <tbody class="block sm:table-row-group">
+            {
+              site.equipo.fichaTecnica.map((f) => (
+                <tr class="block border-b border-borde py-3 align-top last:border-0 sm:table-row sm:py-0">
+                  <th scope="row" class="block pb-1 font-bold text-texto sm:table-cell sm:w-2/5 sm:py-3 sm:pr-4">{f.caracteristica}</th>
+                  <td class="block break-words text-texto-suave sm:table-cell sm:py-3">
+                    <Dato valor={f.detalle} />
+                    {f.caracteristica === 'Modelo' && (
+                      <span class="mt-1 block text-base">{site.equipo.referencia}</span>
+                    )}
+                    {f.caracteristica === 'Sistema operativo' && (
+                      <span class="mt-1 block text-base">
+                        <Dato valor={site.equipo.finSoporte} />
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <div class="rounded-3xl bg-azul p-7 text-white">
+      <h3 class="text-2xl font-bold text-white">Por qué Chromebook</h3>
+      <ol class="mt-5 grid gap-5">
+        {
+          razones.map((r, i) => (
+            <li class="flex items-start gap-4 text-lg leading-snug">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white font-display text-xl font-bold text-azul">
+                {i + 1}
+              </span>
+              <span class="pt-1.5">{r}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</Seccion>

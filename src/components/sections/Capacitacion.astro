@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import Seccion from '../ui/Seccion.astro';
+import Dato from '../ui/Dato.astro';
+import Icono, { type NombreIcono } from '../ui/Icono.astro';
+import { site } from '../../data/site';
+import taller from '../../assets/images/taller.jpg';
+
+const modulos: { n: number; icono: NombreIcono; titulo: string; texto: string }[] = [
+  {
+    n: 1,
+    icono: 'compu',
+    titulo: 'Uso del equipo',
+    texto:
+      'Prender y apagar, conectarse al wifi, usar el navegador, el correo, las videollamadas y las plataformas de series.',
+  },
+  {
+    n: 2,
+    icono: 'escudo',
+    titulo: 'Seguridad digital',
+    texto:
+      'Cómo reconocer un mensaje o una llamada de phishing, cuidar las claves, identificar páginas oficiales y qué hacer si algo parece raro.',
+  },
+  {
+    n: 3,
+    icono: 'chat',
+    titulo: 'Inteligencia artificial, sin miedo',
+    texto: 'Qué es, para qué les puede servir en el día a día y cómo distinguir lo real de lo falso.',
+  },
+];
+---
+
+<Seccion id="capacitacion" labelledby="capacitacion-titulo">
+  <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <div>
+      <p class="text-lg font-bold text-terracota">La capacitación</p>
+      <h2 id="capacitacion-titulo" class="mt-2 text-3xl font-bold md:text-[2.5rem]">
+        Talleres en grupos chicos, a su ritmo
+      </h2>
+      <p class="mt-5 text-xl leading-relaxed text-texto-suave">
+        Cada taller es de unas 20 personas y lo coordina un embajador: un jubilado que conoce el equipo y sabe
+        explicarlo con paciencia. Se hacen en centros de jubilados, municipios, bancos aliados y espacios
+        comunitarios.
+      </p>
+    </div>
+    <Image
+      src={taller}
+      alt="Un taller grupal: personas mayores sentadas en fila frente a sus laptops, mientras un instructor se inclina a ayudar a una de ellas."
+      widths={[480, 720, 960, 1200]}
+      sizes="(min-width: 1024px) 560px, 100vw"
+      class="aspect-[3/2] w-full rounded-3xl border border-borde object-cover"
+    />
+  </div>
+
+  <ol class="mt-14 grid gap-5 lg:grid-cols-3">
+    {
+      modulos.map((m) => (
+        <li class="rounded-3xl border border-borde bg-papel p-7">
+          <div class="flex items-center gap-4">
+            <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-celeste text-azul">
+              <Icono nombre={m.icono} class="h-8 w-8" />
+            </span>
+            <span class="text-lg font-bold text-terracota">Módulo {m.n}</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-bold">{m.titulo}</h3>
+          <p class="mt-3 text-lg text-texto-suave">{m.texto}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="mt-8 rounded-2xl border border-borde bg-papel p-6 text-lg">
+    <strong>Duración y formato:</strong>{" "}
+    <Dato valor={site.capacitacion.duracion} />
+  </p>
+</Seccion>

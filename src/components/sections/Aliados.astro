@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import Seccion from '../ui/Seccion.astro';
+import Dato from '../ui/Dato.astro';
+import { site, pendiente } from '../../data/site';
+
+const logosPendientes = [0, 1, 2, 3];
+---
+
+<Seccion id="aliados" fondo="papel" labelledby="aliados-titulo">
+  <h2 id="aliados-titulo" class="max-w-3xl text-3xl font-bold md:text-[2.5rem]">
+    Trabajamos con quienes ya tienen su confianza
+  </h2>
+  <p class="mt-5 max-w-3xl text-xl leading-relaxed text-texto-suave">
+    Buscamos alianzas con bancos, ANSES, PAMI y municipios para llegar a más personas mayores con capacitación en
+    seguridad digital.
+  </p>
+
+  <ul class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+    {
+      site.aliados.length === 0
+        ? logosPendientes.map(() => (
+            <li class="flex min-h-28 items-center justify-center rounded-2xl border-2 border-dashed border-borde bg-crema p-4 text-center">
+              <Dato valor={pendiente('Logo de aliado con convenio firmado')} />
+            </li>
+          ))
+        : site.aliados.map((a) => (
+            <li class="flex min-h-28 items-center justify-center rounded-2xl border border-borde bg-crema p-4">
+              <Image src={a.logo} alt={a.nombre} class="max-h-16 w-auto object-contain" />
+            </li>
+          ))
+    }
+  </ul>
+</Seccion>

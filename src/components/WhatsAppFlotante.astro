@@ -1,0 +1,36 @@
+---
+import Icono from './ui/Icono.astro';
+import { enlaceWhatsapp } from '../lib/utils';
+
+const href = enlaceWhatsapp('Hola, quiero consultar por el paquete Chromebook + capacitación.');
+const externo = href.startsWith('http');
+---
+
+<a
+  href={href}
+  {...externo ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+  aria-label="Escribinos por WhatsApp"
+  data-wa-flotante
+  class="fixed bottom-4 right-4 z-40 inline-flex h-16 items-center justify-center gap-3 rounded-full bg-whatsapp px-5 text-lg font-bold text-white no-underline shadow-[0_10px_30px_-8px_rgba(0,0,0,0.45)] transition-opacity hover:bg-[#145230] hover:text-white md:bottom-6 md:right-6"
+>
+  <Icono nombre="whatsapp" class="h-8 w-8" />
+  <span class="hidden md:inline">Escribinos</span>
+</a>
+
+<script>
+  // Se oculta mientras se ve el formulario, para no tapar el botón de envío
+  const boton = document.querySelector<HTMLElement>('[data-wa-flotante]');
+  const contacto = document.getElementById('contacto');
+  if (boton && contacto && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      ([entrada]) => {
+        const visible = entrada.isIntersecting;
+        boton.style.opacity = visible ? '0' : '1';
+        boton.style.pointerEvents = visible ? 'none' : 'auto';
+        boton.tabIndex = visible ? -1 : 0;
+        boton.setAttribute('aria-hidden', String(visible));
+      },
+      { threshold: 0.15 },
+    ).observe(contacto);
+  }
+</script>

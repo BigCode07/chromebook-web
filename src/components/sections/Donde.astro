@@ -1,0 +1,88 @@
+---
+import Seccion from '../ui/Seccion.astro';
+import Dato from '../ui/Dato.astro';
+import Icono, { type NombreIcono } from '../ui/Icono.astro';
+import { site, pendiente } from '../../data/site';
+
+const canales: { icono: NombreIcono; titulo: string; texto: string; extra?: boolean }[] = [
+  { icono: 'banco', titulo: 'En tu banco', texto: 'Los días de cobro de jubilaciones.' },
+  {
+    icono: 'grupo',
+    titulo: 'En centros de jubilados y municipios',
+    texto: 'Con demostraciones y mini talleres.',
+  },
+  {
+    icono: 'ayuda',
+    titulo: 'En farmacias y centros de salud',
+    texto: 'Con stands en el ingreso.',
+  },
+  {
+    icono: 'ubicacion',
+    titulo: 'En ferias y eventos',
+    texto: 'De tecnología, bancos y municipios, con el equipo en vivo para probar.',
+  },
+  { icono: 'compra', titulo: 'Online', texto: 'En nuestra tienda, con envío.', extra: true },
+];
+
+const filasPendientes = [0, 1, 2];
+---
+
+<Seccion id="donde" fondo="celeste" labelledby="donde-titulo">
+  <h2 id="donde-titulo" class="max-w-3xl text-3xl font-bold md:text-[2.5rem]">Vamos a donde ya están</h2>
+
+  <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      canales.map((c) => (
+        <li class="flex items-start gap-4 rounded-2xl bg-papel p-6">
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-azul text-white">
+            <Icono nombre={c.icono} class="h-8 w-8" />
+          </span>
+          <div>
+            <h3 class="text-xl font-bold leading-snug">{c.titulo}</h3>
+            <p class="mt-1 text-lg text-texto-suave">
+              {c.texto}
+              {c.extra && (
+                <>
+                  {' '}
+                  <Dato valor={site.cobertura} />
+                </>
+              )}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-12 rounded-3xl border border-borde bg-papel p-7 md:p-9">
+    <h3 class="text-2xl font-bold">Próximas fechas</h3>
+    {
+      site.eventos.length === 0 ? (
+        <>
+          <p class="mt-3 text-lg">
+            <Dato valor={pendiente('Calendario de eventos y talleres a completar')} />
+          </p>
+          <ul class="mt-5 grid gap-3">
+            {filasPendientes.map(() => (
+              <li class="grid gap-2 rounded-2xl bg-crema p-4 text-lg sm:grid-cols-3 sm:items-center">
+                <Dato valor={pendiente('Fecha')} />
+                <Dato valor={pendiente('Lugar y dirección')} />
+                <Dato valor={pendiente('Taller / Demostración')} />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <ul class="mt-5 grid gap-3">
+          {site.eventos.map((e) => (
+            <li class="grid gap-2 rounded-2xl bg-crema p-4 text-lg sm:grid-cols-[10rem_1fr_auto] sm:items-center">
+              <span class="font-bold text-azul">{e.fecha}</span>
+              <span>{e.lugar}</span>
+              <span class="rounded-full bg-celeste px-3 py-1 text-base font-bold text-azul">{e.tipo}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Seccion>

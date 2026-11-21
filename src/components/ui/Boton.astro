@@ -1,0 +1,26 @@
+---
+interface Props {
+  href: string;
+  variante?: 'primario' | 'secundario' | 'claro';
+  class?: string;
+  externo?: boolean;
+}
+const { href, variante = 'primario', class: clase = '', externo = false } = Astro.props;
+
+const base =
+  'inline-flex min-h-14 items-center justify-center gap-2 rounded-xl px-7 py-3 text-center text-[1.0625rem] font-bold no-underline transition-colors';
+const variantes = {
+  primario: 'bg-terracota text-white hover:bg-terracota-oscuro hover:text-white',
+  secundario:
+    'border-2 border-azul bg-transparent text-azul hover:bg-azul hover:text-white',
+  claro: 'bg-white text-azul hover:bg-celeste hover:text-azul',
+};
+---
+
+<a
+  href={href}
+  class:list={[base, variantes[variante], clase]}
+  {...externo ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+  <slot />
+</a>

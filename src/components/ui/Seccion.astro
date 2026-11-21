@@ -1,0 +1,28 @@
+---
+interface Props {
+  id?: string;
+  fondo?: 'crema' | 'papel' | 'celeste' | 'azul';
+  class?: string;
+  labelledby?: string;
+  /** Aparición suave al hacer scroll. Desactivar en lo que se ve al cargar. */
+  reveal?: boolean;
+}
+const { id, fondo = 'crema', class: clase = '', labelledby, reveal = true } = Astro.props;
+
+const fondos = {
+  crema: 'bg-crema',
+  papel: 'bg-papel',
+  celeste: 'bg-celeste',
+  azul: 'bg-azul text-white',
+};
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  class:list={[reveal && 'reveal', fondos[fondo], 'py-16 md:py-24', clase]}
+>
+  <div class="mx-auto w-full max-w-[var(--container)] px-5 md:px-8">
+    <slot />
+  </div>
+</section>
