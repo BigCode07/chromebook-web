@@ -8,7 +8,7 @@ interface Props {
 const { href, variante = 'primario', class: clase = '', externo = false } = Astro.props;
 
 const base =
-  'inline-flex min-h-14 items-center justify-center gap-2 rounded-xl px-7 py-3 text-center text-[1.0625rem] font-bold no-underline transition-colors';
+  'inline-flex min-h-14 items-center justify-center gap-2 rounded-xl px-7 py-3 text-center text-[1.0625rem] font-bold no-underline transition active:scale-[0.98]';
 const variantes = {
   primario: 'bg-terracota text-white hover:bg-terracota-oscuro hover:text-white',
   secundario:

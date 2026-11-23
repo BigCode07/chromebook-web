@@ -11,15 +11,6 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Fraunces',
-      cssVariable: '--font-fraunces',
-      weights: [500, 600, 700],
-      styles: ['normal'],
-      subsets: ['latin'],
-      fallbacks: ['Georgia', 'serif'],
-    },
-    {
-      provider: fontProviders.google(),
       name: 'Atkinson Hyperlegible',
       cssVariable: '--font-atkinson',
       weights: [400, 700],

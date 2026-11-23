@@ -12,19 +12,18 @@ const opciones = [
 ];
 ---
 
-<Seccion id="contacto" fondo="azul" labelledby="contacto-titulo">
+<Seccion id="contacto" labelledby="contacto-titulo">
   <div class="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
     <div>
-      <h2 id="contacto-titulo" class="text-3xl font-bold text-white md:text-[2.75rem]">
-        Regalales autonomía.
-        <span class="mt-1 block text-[#f3c969]">Y tranquilidad para vos.</span>
+      <h2 id="contacto-titulo" class="text-3xl font-bold md:text-[2.75rem]">
+        Regalales autonomía. <span class="block">Y tranquilidad para vos.</span>
       </h2>
-      <p class="mt-6 text-xl leading-relaxed text-[#eaf0f6]">
-        Dejanos tus datos y te contactamos para contarte cómo funciona el paquete.
+      <p class="mt-6 text-xl leading-relaxed text-texto-suave">
+        Dejanos tus datos y te contamos precio, cuotas y talleres.
       </p>
     </div>
 
-    <div class="rounded-3xl bg-papel p-6 text-texto md:p-9">
+    <div class="rounded-2xl border border-borde bg-papel p-6 text-texto md:p-9">
       <form id="form-contacto" novalidate class="grid gap-6" data-form-contacto>
         <div>
           <label for="f-nombre" class="text-lg font-bold text-azul">Tu nombre</label>
@@ -93,9 +92,9 @@ const opciones = [
       </form>
 
       <div data-exito hidden role="status" tabindex="-1" class="py-6 text-center">
-        <p class="font-display text-3xl font-bold text-azul">¡Gracias, <span data-exito-nombre></span>!</p>
+        <p class="text-3xl font-bold text-azul">¡Gracias, <span data-exito-nombre></span>!</p>
         <p class="mt-4 text-xl text-texto-suave">
-          Recibimos tus datos. Esta versión de la página es una demostración: todavía no se envían a nadie.
+          Este formulario todavía está en prueba: tus datos no se enviaron.
         </p>
       </div>
     </div>

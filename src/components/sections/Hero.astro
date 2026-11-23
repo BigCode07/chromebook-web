@@ -2,60 +2,32 @@
 import { Image } from 'astro:assets';
 import Seccion from '../ui/Seccion.astro';
 import Boton from '../ui/Boton.astro';
-import Icono from '../ui/Icono.astro';
 import hero from '../../assets/images/hero.jpg';
-
-const garantias = [
-  { icono: 'check', texto: 'Capacitación incluida (no se cobra aparte)' },
-  { icono: 'tarjeta', texto: 'Cuotas con tu tarjeta' },
-  { icono: 'soporte', texto: 'Soporte después de la compra' },
-] as const;
 ---
 
-<Seccion id="inicio" labelledby="hero-titulo" reveal={false} class="!pb-16 !pt-[calc(var(--header-h)+2.5rem)] md:!pt-[calc(var(--header-h)+4rem)]">
-  <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+<Seccion id="inicio" labelledby="hero-titulo" reveal={false} class="!pb-16 !pt-[calc(var(--header-h)+2rem)] md:!pt-[calc(var(--header-h)+4rem)]">
+  <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
     <div>
-      <p class="mb-5 inline-block rounded-full bg-celeste px-4 py-1.5 text-base font-bold text-azul">
-        Chromebook + capacitación, en un solo paquete
-      </p>
-      <h1 id="hero-titulo" class="text-[2.375rem] font-bold leading-[1.1] sm:text-5xl lg:text-[3.5rem]">
+      <h1 id="hero-titulo" class="text-[min(2.375rem,11vw)] font-bold sm:text-5xl">
         Una computadora simple y segura para tus viejos.
       </h1>
-      <p class="mt-5 font-display text-2xl font-semibold text-terracota sm:text-3xl">
-        Y alguien que les enseña a usarla.
-      </p>
-      <p class="mt-6 max-w-[38rem] text-xl leading-relaxed text-texto-suave">
-        Chromebook + capacitación en uso y seguridad digital, en un solo paquete. Para que puedan revisar sus
-        cuentas, leer el diario y ver sus series sin caer en estafas.
+      <p class="mt-6 max-w-[34rem] text-xl leading-relaxed text-texto-suave">
+        Incluye talleres donde otro jubilado les enseña a usarla y a reconocer estafas.
       </p>
       <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-        <Boton href="#contacto">Quiero el paquete para mi papá / mi mamá</Boton>
-        <Boton href="#capacitacion" variante="secundario">Ver cómo es la capacitación</Boton>
+        <Boton href="#contacto">Quiero el paquete</Boton>
+        <Boton href="#paquete" variante="secundario">Ver qué incluye</Boton>
       </div>
-      <ul class="mt-9 grid gap-3 sm:grid-cols-3 sm:gap-4">
-        {
-          garantias.map((g) => (
-            <li class="flex items-start gap-3 text-base font-bold leading-snug text-azul">
-              <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-azul text-white">
-                <Icono nombre={g.icono} class="h-5 w-5" />
-              </span>
-              <span>{g.texto}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
 
-    <div class="relative">
-      <Image
-        src={hero}
-        alt="Una pareja de personas mayores en su casa, usando una laptop sobre la mesa. Una de ellas la usa y la otra mira con atención, con tranquilidad y buena luz."
-        widths={[480, 720, 960, 1200]}
-        sizes="(min-width: 1024px) 560px, 100vw"
-        loading="eager"
-        fetchpriority="high"
-        class="aspect-[4/3] w-full rounded-3xl border border-borde object-cover shadow-[0_20px_50px_-20px_rgba(27,58,92,0.35)]"
-      />
-    </div>
+    <Image
+      src={hero}
+      alt="Un hombre mayor usa una laptop en su casa mientras una mujer mayor lo acompaña a su lado."
+      widths={[480, 720, 960, 1200]}
+      sizes="(min-width: 1024px) 540px, 100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="aspect-[4/3] w-full rounded-2xl object-cover"
+    />
   </div>
 </Seccion>

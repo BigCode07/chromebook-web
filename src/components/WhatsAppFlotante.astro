@@ -1,12 +1,12 @@
 ---
 import Icono from './ui/Icono.astro';
-import { enlaceWhatsapp } from '../lib/utils';
+import { enlaceWhatsapp, hayWhatsapp } from '../lib/utils';
 
 const href = enlaceWhatsapp('Hola, quiero consultar por el paquete Chromebook + capacitación.');
 const externo = href.startsWith('http');
 ---
 
-<a
+{hayWhatsapp() && (<a
   href={href}
   {...externo ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
   aria-label="Escribinos por WhatsApp"
@@ -15,7 +15,7 @@ const externo = href.startsWith('http');
 >
   <Icono nombre="whatsapp" class="h-8 w-8" />
   <span class="hidden md:inline">Escribinos</span>
-</a>
+</a>)}
 
 <script>
   // Se oculta mientras se ve el formulario, para no tapar el botón de envío
