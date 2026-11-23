@@ -11,7 +11,10 @@ export type Mensaje = {
   caso?: { texto: string; url: string };
 };
 
-/** Textos adaptados. Los links usan el dominio reservado .example y nunca son clickeables. */
+/**
+ * Textos adaptados. Los links falsos imitan a los reales pero van cortados con "…", como en un SMS:
+ * así no existe un dominio al que entrar. Nunca se muestran clickeables.
+ */
 export const mensajes: Mensaje[] = [
   {
     contexto: 'Publicaste un mueble en internet. Te llama un comprador muy amable.',
@@ -40,10 +43,10 @@ export const mensajes: Mensaje[] = [
     contexto: 'Estás esperando un paquete que compraste.',
     remitente: 'Correo Argentino',
     texto:
-      'Su paquete ha llegado al centro de distribución local. La dirección está incompleta: confirme una dirección válida dentro de las 24 horas para evitar la devolución. correo-entregas.example',
+      'Su paquete ha llegado al centro de distribución local. La dirección está incompleta: confirme una dirección válida dentro de las 24 horas para evitar la devolución. https://correoargentino.com.ar-seguimiento.c…',
     estafa: true,
     explicacion:
-      'No pide plata y coincide con algo que esperabas: por eso engaña. El link lleva a una página que imita a la oficial.',
+      'No pide plata y coincide con algo que esperabas: por eso engaña. El link imita al oficial, pero después de "com.ar" sigue con un guion: ya es otra página.',
     consejo: 'No toques el link. Buscá el envío en la página oficial, escribiendo vos la dirección.',
     caso: {
       texto: 'Chequeado documentó este mensaje falso, atribuido a Correo Argentino, en 2025.',
@@ -86,6 +89,15 @@ export const mensajes: Mensaje[] = [
       texto: 'Chequeado registró esta maniobra con las vacunas de COVID, y otra con la del dengue en 2024. El Ministerio respondió que no llama para dar turnos.',
       url: 'https://chequeado.com/el-explicador/estafas-en-whatsapp-sobre-la-vacunacion-contra-el-dengue-como-prevenirlas/',
     },
+  },
+  {
+    contexto: 'Querés saber dónde está tu paquete. Escribiste vos la dirección en el navegador.',
+    remitente: 'https://www.correoargentino.com.ar',
+    texto: 'Seguimiento de envíos. Ingresá tu número de seguimiento para ver dónde está tu paquete.',
+    estafa: false,
+    explicacion:
+      'Es la dirección oficial: termina justo en "correoargentino.com.ar". Llegaste vos, y solo te pide el número del envío.',
+    consejo: 'Mirá qué hay inmediatamente antes de la primera barra sola (/). Si sigue con un guion u otra palabra, no es la oficial.',
   },
   {
     contexto: 'Te llega un aviso un domingo a la noche. Vos no hiciste nada.',
