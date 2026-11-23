@@ -2,7 +2,7 @@
 import Seccion from '../ui/Seccion.astro';
 
 const campo =
-  'mt-2 block min-h-[3.75rem] w-full rounded-xl border-2 border-azul/40 bg-white px-4 py-3 text-xl text-texto placeholder:text-texto-suave/70 aria-[invalid=true]:border-terracota';
+  'mt-2 block min-h-[3.75rem] w-full rounded-xl border-2 border-azul/40 bg-white px-4 py-3 text-xl text-texto placeholder:text-texto-suave/70 aria-[invalid=true]:border-peligro';
 
 const opciones = [
   { valor: 'papa', texto: 'Mi papá' },
@@ -12,18 +12,18 @@ const opciones = [
 ];
 ---
 
-<Seccion id="contacto" labelledby="contacto-titulo">
+<Seccion id="contacto" fondo="azul" labelledby="contacto-titulo">
   <div class="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
     <div>
-      <h2 id="contacto-titulo" class="text-3xl font-bold md:text-[2.75rem]">
+      <h2 id="contacto-titulo" class="text-3xl font-bold text-white md:text-[2.75rem]">
         Regalales autonomía. <span class="block">Y tranquilidad para vos.</span>
       </h2>
-      <p class="mt-6 text-xl leading-relaxed text-texto-suave">
+      <p class="mt-6 text-xl leading-relaxed">
         Dejanos tus datos y te contamos precio, cuotas y talleres.
       </p>
     </div>
 
-    <div class="rounded-2xl border border-borde bg-papel p-6 text-texto md:p-9">
+    <div class="rounded-2xl sobre-claro bg-papel p-6 text-texto md:p-9">
       <form id="form-contacto" novalidate class="grid gap-6" data-form-contacto>
         <div>
           <label for="f-nombre" class="text-lg font-bold text-azul">Tu nombre</label>
@@ -36,7 +36,7 @@ const opciones = [
             aria-describedby="e-nombre"
             class={campo}
           />
-          <p id="e-nombre" class="mt-2 hidden text-base font-bold text-terracota" role="alert"></p>
+          <p id="e-nombre" class="mt-2 hidden text-base font-bold text-peligro" role="alert"></p>
         </div>
 
         <div>
@@ -51,7 +51,7 @@ const opciones = [
             aria-describedby="e-tel"
             class={campo}
           />
-          <p id="e-tel" class="mt-2 hidden text-base font-bold text-terracota" role="alert"></p>
+          <p id="e-tel" class="mt-2 hidden text-base font-bold text-peligro" role="alert"></p>
         </div>
 
         <div>
@@ -65,7 +65,7 @@ const opciones = [
             aria-describedby="e-loc"
             class={campo}
           />
-          <p id="e-loc" class="mt-2 hidden text-base font-bold text-terracota" role="alert"></p>
+          <p id="e-loc" class="mt-2 hidden text-base font-bold text-peligro" role="alert"></p>
         </div>
 
         <fieldset aria-describedby="e-para" class="min-w-0">
@@ -80,12 +80,12 @@ const opciones = [
               ))
             }
           </div>
-          <p id="e-para" class="mt-2 hidden text-base font-bold text-terracota" role="alert"></p>
+          <p id="e-para" class="mt-2 hidden text-base font-bold text-peligro" role="alert"></p>
         </fieldset>
 
         <button
           type="submit"
-          class="inline-flex min-h-14 items-center justify-center rounded-xl bg-terracota px-7 py-3 text-lg font-bold text-white transition-colors hover:bg-terracota-oscuro"
+          class="inline-flex min-h-14 items-center justify-center rounded-xl bg-accion px-7 py-3 text-lg font-bold text-azul-oscuro transition-colors hover:bg-accion-oscuro"
         >
           Quiero que me contacten
         </button>

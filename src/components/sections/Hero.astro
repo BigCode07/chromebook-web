@@ -5,18 +5,18 @@ import Boton from '../ui/Boton.astro';
 import hero from '../../assets/images/hero.jpg';
 ---
 
-<Seccion id="inicio" labelledby="hero-titulo" reveal={false} class="!pb-16 !pt-[calc(var(--header-h)+2rem)] md:!pt-[calc(var(--header-h)+4rem)]">
+<Seccion id="inicio" labelledby="hero-titulo" fondo="azul" reveal={false} class="!pb-16 !pt-[calc(var(--header-h)+2rem)] md:!pt-[calc(var(--header-h)+4rem)]">
   <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
     <div>
-      <h1 id="hero-titulo" class="text-[min(2.375rem,11vw)] font-bold sm:text-5xl">
+      <h1 id="hero-titulo" class="text-[min(2.375rem,11vw)] font-bold text-white sm:text-5xl">
         Una computadora simple y segura para tus viejos.
       </h1>
-      <p class="mt-6 max-w-[34rem] text-xl leading-relaxed text-texto-suave">
+      <p class="mt-6 max-w-[34rem] text-xl leading-relaxed">
         Incluye talleres donde otro jubilado les enseña a usarla y a reconocer estafas.
       </p>
       <div class="mt-8 flex flex-col gap-4 sm:flex-row">
         <Boton href="#contacto">Quiero el paquete</Boton>
-        <Boton href="#paquete" variante="secundario">Ver qué incluye</Boton>
+        <Boton href="#paquete" variante="claro">Ver qué incluye</Boton>
       </div>
     </div>
 
