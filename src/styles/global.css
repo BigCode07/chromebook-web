@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-azul: #1b3a5c;
-  --color-azul-oscuro: #12283f;
-  --color-terracota: #a3471f;
-  --color-terracota-oscuro: #873a18;
-  --color-crema: #fbf6ec;
-  --color-papel: #fffdf8;
-  --color-borde: #e6dcc8;
-  --color-celeste: #e3ecf5;
-  --color-texto: #1f2933;
-  --color-texto-suave: #4a5563;
-  --color-foco: #e0a93b;
-  --color-whatsapp: #1b6b3a;
+  /* Un color, un trabajo: azul = marca, accion = botón principal, peligro/seguro = significado, resto = neutros azulados. */
+  --color-azul: #003d80;
+  --color-azul-oscuro: #00224d;
+  --color-accion: #ffb42f;
+  --color-accion-oscuro: #e59e0f;
+  --color-niebla: #eff5fc;
+  --color-papel: #fcfdff;
+  --color-borde: #cdd9e8;
+  --color-celeste: #d7e8fe;
+  --color-texto: #162232;
+  --color-texto-suave: #415166;
+  --color-peligro: #a92321;
+  --color-whatsapp: #17653c;
+  --color-seguro: #17653c;
 
   --font-sans: var(--font-atkinson), system-ui, sans-serif;
 
@@ -42,7 +44,7 @@ html[data-font-scale='muy-grande'] {
 @layer base {
   body {
     margin: 0;
-    background: var(--color-crema);
+    background: var(--color-niebla);
     color: var(--color-texto);
     font-family: var(--font-sans);
     font-size: 1.125rem;
@@ -69,11 +71,11 @@ html[data-font-scale='muy-grande'] {
     color: var(--color-azul);
   }
   a:hover {
-    color: var(--color-terracota);
+    color: var(--color-azul-oscuro);
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-foco);
+    outline: 3px solid var(--foco, var(--color-azul));
     outline-offset: 3px;
   }
 }
@@ -125,4 +127,12 @@ summary {
 }
 summary::-webkit-details-marker {
   display: none;
+}
+
+/* El foco contrasta con el fondo donde está */
+.sobre-azul {
+  --foco: var(--color-accion);
+}
+.sobre-claro {
+  --foco: var(--color-azul);
 }

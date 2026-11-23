@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ControlLetra from '../components/ControlLetra.astro';
+import Boton from '../components/ui/Boton.astro';
+import { site } from '../data/site';
+import { mensajes } from '../data/juego';
+
+const total = mensajes.length;
+const boton =
+  'inline-flex min-h-16 cursor-pointer items-center justify-center rounded-xl px-7 py-3 text-xl font-bold transition active:scale-[0.98]';
+---
+
+<BaseLayout
+  title={`¿Caerías en esta estafa? | ${site.marca}`}
+  description="Situaciones basadas en casos y alertas reales. ¿Los reconocés? No te pedimos ningún dato."
+>
+  <header class="border-b border-borde bg-papel">
+    <div class="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-2 px-5 py-3">
+      <a href="/" class="inline-flex min-h-12 items-center text-xl font-bold text-azul no-underline">{site.marca}</a>
+      <ControlLetra />
+    </div>
+  </header>
+
+  <main id="contenido" class="mx-auto w-full max-w-3xl px-5 py-8 md:py-12" data-juego>
+    <section data-pantalla>
+      <h1 class="text-4xl font-bold md:text-5xl">¿Caerías en esta estafa?</h1>
+      <p class="mt-5 text-xl">Te mostramos {total} situaciones, varias basadas en casos y alertas reales. ¿Es confiable o es una estafa? No es tan fácil.</p>
+      <p class="mt-3 text-xl font-bold text-azul">No te pedimos ningún dato. Sin apuro.</p>
+      <noscript><p class="mt-5 text-xl">Para jugar necesitás activar JavaScript en tu navegador.</p></noscript>
+      <button type="button" data-seguir class={`${boton} mt-8 w-full bg-accion text-azul-oscuro hover:bg-accion-oscuro sm:w-auto`}>
+        Empezar
+      </button>
+    </section>
+
+    {
+      mensajes.map((m, i) => (
+        <section data-pantalla data-estafa={String(m.estafa)} hidden>
+          <p class="text-lg text-texto-suave">Situación {i + 1} de {total}</p>
+          <h2 tabindex="-1" data-titulo class="mt-1 text-3xl font-bold">¿Es confiable o es una estafa?</h2>
+          <p class="mt-4 text-xl">{m.contexto}</p>
+          <div class="mt-4 rounded-2xl border border-borde bg-papel p-6">
+            <p class="text-lg font-bold text-azul">{m.remitente}</p>
+            <p class="mt-2 text-xl leading-snug [overflow-wrap:anywhere]">{m.texto}</p>
+          </div>
+          <div data-opciones class="mt-6 grid gap-4 sm:grid-cols-2">
+            <button type="button" data-responder="false" class={`${boton} border-2 border-azul text-azul hover:bg-celeste`}>
+              Es confiable
+            </button>
+            <button type="button" data-responder="true" class={`${boton} border-2 border-azul text-azul hover:bg-celeste`}>
+              Es una estafa
+            </button>
+          </div>
+          <div data-respuesta hidden class="mt-6 rounded-2xl bg-celeste p-6">
+            <h3 tabindex="-1" data-veredicto class={`text-2xl font-bold ${m.estafa ? 'text-peligro' : 'text-seguro'}`} />
+            <p class="mt-3 text-xl">{m.explicacion}</p>
+            <p class="mt-3 text-xl font-bold text-azul">{m.consejo}</p>
+            {m.caso && (
+              <p class="mt-4 border-t border-azul/30 pt-4 text-lg">
+                <strong>En la vida real.</strong> {m.caso.texto}
+                <a href={m.caso.url} target="_blank" rel="noopener noreferrer" class="flex min-h-12 items-center font-bold underline underline-offset-4">
+                  Ver la fuente
+                </a>
+              </p>
+            )}
+            <button type="button" data-seguir class={`${boton} mt-6 w-full bg-accion text-azul-oscuro hover:bg-accion-oscuro sm:w-auto`}>
+              {i + 1 === total ? 'Ver mi resultado' : 'Siguiente'}
+            </button>
+          </div>
+        </section>
+      ))
+    }
+
+    <section data-pantalla data-final hidden>
+      <h2 tabindex="-1" data-titulo class="text-4xl font-bold">
+        Acertaste <span data-puntos>0</span> de {total}
+      </h2>
+      <p data-comentario class="mt-4 text-xl"></p>
+      <p class="mt-6 text-2xl font-bold text-azul">Si te guían paso a paso, te piden un código o te apuran: cortá y llamá vos a un número que ya conozcas.</p>
+      <div class="mt-8 flex flex-col gap-4">
+        <a
+          data-compartir
+          href="https://wa.me/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`${boton} bg-whatsapp text-center text-white no-underline hover:bg-[#0f4a2b] hover:text-white`}
+        >
+          Desafiar a mi familia por WhatsApp
+        </a>
+        <Boton href="/#paquete" variante="secundario">Ver los talleres y la Chromebook</Boton>
+        <button type="button" data-reiniciar class="min-h-14 cursor-pointer text-lg font-bold text-azul underline underline-offset-4">
+          Jugar de nuevo
+        </button>
+      </div>
+    </section>
+
+    <p class="mt-10 text-base text-texto-suave">Las estafas son textos adaptados de casos y alertas publicados. Las situaciones confiables son ejemplos. No representan comunicaciones de las instituciones nombradas.</p>
+  </main>
+</BaseLayout>
+
+<script>
+  const pantallas = [...document.querySelectorAll<HTMLElement>('[data-pantalla]')];
+  const final = document.querySelector<HTMLElement>('[data-final]')!;
+  const total = pantallas.length - 2; // sin inicio ni final
+  let actual = 0;
+  let puntos = 0;
+
+  function mostrarResultado() {
+    final.querySelector('[data-puntos]')!.textContent = String(puntos);
+    final.querySelector('[data-comentario]')!.textContent =
+      puntos === total
+        ? '¡Muy bien! Tenés buen ojo. Ayudá a alguien más a reconocerlas.'
+        : 'Nos puede pasar a cualquiera: están hechas para confundir. Reconocerlas se aprende.';
+    const texto = `Acerté ${puntos} de ${total} en "¿Caerías en esta estafa?". ¿Y vos? No pide ningún dato: ${location.origin}${location.pathname}`;
+    final.querySelector<HTMLAnchorElement>('[data-compartir]')!.href = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+  }
+
+  function irA(i: number) {
+    pantallas[actual].hidden = true;
+    actual = i;
+    if (pantallas[i] === final) mostrarResultado();
+    pantallas[i].hidden = false;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    pantallas[i].querySelector<HTMLElement>('[data-titulo]')?.focus({ preventScroll: true });
+  }
+
+  document.querySelectorAll('[data-seguir]').forEach((b) => b.addEventListener('click', () => irA(actual + 1)));
+
+  document.querySelectorAll<HTMLButtonElement>('[data-responder]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const p = pantallas[actual];
+      const esEstafa = p.dataset.estafa === 'true';
+      const acerto = b.dataset.responder === p.dataset.estafa;
+      if (acerto) puntos++;
+      const veredicto = p.querySelector<HTMLElement>('[data-veredicto]')!;
+      veredicto.textContent = `${acerto ? '¡Bien!' : 'Esta vez no.'} ${esEstafa ? 'Es una estafa.' : 'Es confiable.'}`;
+      p.querySelector<HTMLElement>('[data-opciones]')!.hidden = true;
+      p.querySelector<HTMLElement>('[data-respuesta]')!.hidden = false;
+      veredicto.focus();
+    }),
+  );
+
+  document.querySelector('[data-reiniciar]')?.addEventListener('click', () => {
+    puntos = 0;
+    document.querySelectorAll<HTMLElement>('[data-opciones]').forEach((e) => (e.hidden = false));
+    document.querySelectorAll<HTMLElement>('[data-respuesta]').forEach((e) => (e.hidden = true));
+    irA(1);
+  });
+</script>
+
+<style>
+  /* Las clases de display de Tailwind no deben pisar [hidden] */
+  [hidden] {
+    display: none !important;
+  }
+</style>

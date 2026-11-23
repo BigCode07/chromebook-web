@@ -1,18 +1,18 @@
 ---
 interface Props {
   id?: string;
-  fondo?: 'crema' | 'papel' | 'celeste';
+  fondo?: 'niebla' | 'papel' | 'azul';
   class?: string;
   labelledby?: string;
   /** Aparición suave al hacer scroll. Desactivar en lo que se ve al cargar. */
   reveal?: boolean;
 }
-const { id, fondo = 'crema', class: clase = '', labelledby, reveal = true } = Astro.props;
+const { id, fondo = 'niebla', class: clase = '', labelledby, reveal = true } = Astro.props;
 
 const fondos = {
-  crema: 'bg-crema',
+  niebla: 'bg-niebla',
   papel: 'bg-papel',
-  celeste: 'bg-celeste',
+  azul: 'sobre-azul bg-azul text-celeste',
 };
 ---
 
