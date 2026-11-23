@@ -2,42 +2,27 @@
 import { Image } from 'astro:assets';
 import Seccion from '../ui/Seccion.astro';
 import Boton from '../ui/Boton.astro';
-import Dato from '../ui/Dato.astro';
-import { site } from '../../data/site';
 import { enlaceWhatsapp } from '../../lib/utils';
 import embajador from '../../assets/images/embajador.jpg';
 
 const wa = enlaceWhatsapp('Hola, soy jubilado/a y quiero sumarme como embajador/a.');
 ---
 
-<Seccion id="embajadores" fondo="papel" labelledby="embajadores-titulo">
+<Seccion id="embajadores" fondo="celeste" labelledby="embajadores-titulo">
   <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
     <Image
       src={embajador}
       alt="Dos personas mayores frente a una laptop: una se inclina, con los anteojos en la mano, para explicarle algo a la otra."
       widths={[480, 720, 960, 1200]}
       sizes="(min-width: 1024px) 560px, 100vw"
-      class="aspect-[16/9] w-full rounded-3xl border border-borde object-cover"
+      class="aspect-[16/9] w-full rounded-2xl object-cover"
     />
     <div>
-      <p class="text-lg font-bold text-terracota">Embajadores</p>
-      <h2 id="embajadores-titulo" class="mt-2 text-3xl font-bold md:text-[2.5rem]">
-        Aprenden de alguien que los entiende
-      </h2>
+      <h2 id="embajadores-titulo" class="text-3xl font-bold md:text-[2.5rem]">Les enseña alguien que los entiende</h2>
       <p class="mt-5 text-xl leading-relaxed text-texto-suave">
-        Nuestros embajadores son jubilados contratados y formados por <Dato valor={site.marca} />. Dan los
-        talleres, acompañan en los puntos de venta y responden las dudas de sus pares. La confianza se construye
-        entre iguales.
+        Los embajadores son jubilados que formamos y contratamos para dar los talleres.
       </p>
-      <p class="mt-5 text-xl font-bold text-azul">¿Sos jubilado y te gusta enseñar? Sumate como embajador.</p>
-      <Boton
-        href={wa}
-        variante="secundario"
-        class="mt-6"
-        externo={wa.startsWith('http')}
-      >
-        Quiero ser embajador
-      </Boton>
+      <Boton href={wa} variante="secundario" class="mt-6" externo={wa.startsWith('http')}>Quiero ser embajador</Boton>
     </div>
   </div>
 </Seccion>

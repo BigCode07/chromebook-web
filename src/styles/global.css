@@ -12,12 +12,8 @@
   --color-texto: #1f2933;
   --color-texto-suave: #4a5563;
   --color-foco: #e0a93b;
-  --color-aviso: #fff1c2;
-  --color-aviso-borde: #8a6d1f;
-  --color-aviso-texto: #5c4813;
   --color-whatsapp: #1b6b3a;
 
-  --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-atkinson), system-ui, sans-serif;
 
   --header-h: 4.5rem;
@@ -30,13 +26,6 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-/* En pantallas anchas el header tiene dos filas (marca y controles + navegación) */
-@media (min-width: 80rem) {
-  :root {
-    --header-h: 8rem;
-  }
-}
-
 html[data-font-scale='grande'] {
   font-size: 112.5%;
 }
@@ -64,11 +53,11 @@ html[data-font-scale='muy-grande'] {
   h1,
   h2,
   h3 {
-    font-family: var(--font-display);
     color: var(--color-azul);
     line-height: 1.15;
     letter-spacing: -0.01em;
     text-wrap: balance;
+    overflow-wrap: anywhere;
   }
 
   p,
